@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Inicio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="wrapper">
+			<div id="bg"></div>
+			<div id="overlay"></div>
+			<div id="main">
+			<!-- Header -->
+					<header id="header">
+						<font color="black"><h1>HC GERIATRIA</h1><font>
+					<!--	<p>Dr &nbsp;&bull;&nbsp; Dr &nbsp;&bull;&nbsp; Dr</p>-->
+						<nav>
+							<ul>
+			  <form action="autentificar.php" method="post">	
+    <div id="fade-box">
+      <input type="text" name="username" id="username" placeholder="Username" required> <br />
+        <input type="password" name="pass" placeholder="Password" required> <br />
+          
+          <button>Log In</button> 
+        </div>
+      </form>
+        
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<span class="copyright">&copy; </span>
+					</footer>
+				
+			</div>
+		</div>
+		<script>
+			window.onload = function() { document.body.classList.remove('is-preload'); }
+			window.ontouchmove = function() { return false; }
+			window.onorientationchange = function() { document.body.scrollTop = 0; }
+		</script>
+	</body>
+</html>

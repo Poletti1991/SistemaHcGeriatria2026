@@ -1,0 +1,697 @@
+<?php
+session_start();
+
+if ($_SESSION['valor'] != true) {
+    header('Location: index.html');
+}
+?>
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<link rel="shortcut icon" href="images\icons\favicon.ico" /> 
+		<title>Ver Historia Clinica</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main (2).css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript (2).css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<!-- <a href="index.html" class="logo">-->
+								<!-- 	<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">.</span>-->
+								<H1> HISTORIA CLINICA ESPECIFICADA: </h1>
+								
+                                <div id="fade-box"></div>
+							
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+<?php 
+$substr="";$substr1="";$substr2="";$substr3="";$substr4="";
+$substr5="";$substr6="";$substr7="";$substr8="";$substr9="";
+$substr10="";$substr11="";$substr12="";
+include "conectar.php";//conectar a la base de dato
+$id= $_POST ['id'];
+$verificar_usuario=mysql_query("SELECT *
+		FROM historia_clinica
+		WHERE  id_paciente LIKE '$id'");
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$substr=$articulo['id_paciente'];
+	$substr1=$articulo['nombre_apellido'];
+	$substr2=$articulo['dni'];
+	$substr3=$articulo['domicilio'];
+	$substr4=$articulo['edad'];
+	$substr5=$articulo['ocupacion'];
+	$substr6=$articulo['obra_social'];
+	$substr7=$articulo['motivo_de_consulta'];
+	$substr8=$articulo['vive_con'];
+	$substr9=$articulo['contencion'];
+	$substr10=$articulo['que_contencion_tiene'];
+	$substr11=$articulo['fecha'];
+	$substr12=$articulo['file_name'];	
+}
+                        $dni= $substr2
+?>
+						</div>
+					</header>
+
+				
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="menu.php">Principal</a></li>
+							<li><a href="cerrar_sesion.php">cerrar sesion</a></li>
+							
+							<li><a href="InformePacientes.php">Cargar Informes Pacientes</a></li>							
+							<li><a href="CargarHC.php">Cargar Historias Clinicas</a></li>
+							
+							<li><a href="ModificarHC.php">Modificar Historias Clinicas</a></li>
+						
+							<li><a href="AdministrarTurnos.php">Administrar Turnos</a></li>
+							
+							<li><a href="Informe2Pacientes.php">Ver Informes Pacientes</a></li>
+							<li><a href="BuscarPacientes.php">Buscar/Listar H.C. Pacientes</a></li>							
+										
+							<li><a href="AgregarEvolucion.php">Evolucion</a></li>
+							<li><a href="AgregarPendientes.php">Pendientes</a></li>
+							
+							
+							<li><a href="escalas.php">Calcular Escalas</a></li>
+															<!--<li><a href="AgregarPendientes.html">Agregar Pendientes</a></li>-->
+						</ul>
+					</nav>
+
+	<!-- Main -->
+					<div id="main">
+						<div class="inner ">
+						<form action="MCHC2.php" enctype="multipart/form-data" action="uploader.php" method="POST">
+							  <div id="divMain" class="row" >
+							 <div class="col-4 col-12-small">  
+						<div >
+						<p>Foto del Paciente: </p>
+                <img src="<?php echo "Fotos/".$substr12;?>" width="100" height="100" />
+            </div>
+			 </div>
+			<div class="col-4 col-12-small">  
+            <div id="file-preview-zone" alt="" class="img-fluid" style="width:100%">
+			
+            </div>
+        </div>
+		</div>
+			<input type="text" name="ID" id="ID" value="<?php echo"".$id;?>" readonly="readonly"> <br />				   	
+    <div id="page">
+	
+	  <input type="date" name="fecha" value="<?php echo"".$substr11;?>" step="1" min="2019-01-01" max="2025-12-31" value="2018-01-01"readonly="readonly"> <br />
+	  <div class="container">
+  <div class="row">
+   <div class="col-4 col-12-small">
+    <label for="name">Nombre y Apellido:</label><input type="text" name="Nombre" id="username" value="<?php echo"".$substr1;?>" placeholder="Nombre y Apellido" readonly="readonly"><br />
+	   </div>
+  <div class="col-4 col-12-small">
+   <label for="name">DNI:</label>
+	  <input type="text" name="DNI" id="dni" value="<?php echo"".$substr2;?>" placeholder="DNI" readonly="readonly"> <br />
+	   </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Domicilio:</label>
+	   <input type="text" name="Domicilio" id="domicilio" value="<?php echo"".$substr3;?>" placeholder="Domicilio" readonly="readonly"> <br />
+	    </div>
+ 
+  <div class="col-4 col-12-small">
+   <label for="name">Edad</label>
+	   <input type="text" name="Edad" id="edad" value="<?php echo"".$substr4;?>" placeholder="Edad" readonly="readonly"> <br />
+	    </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Ocupaci&oacuten:</label>
+	    <input type="text" name="Ocupacion" id="ocupacion" value="<?php echo"".$substr5;?>" placeholder="Ocupacion" readonly="readonly"> <br/>
+		 </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Obra Social:</label>
+		 <input type="text" name="OS" id="os" value="<?php echo"".$substr6;?>" placeholder="Obra Social" readonly="readonly"> <br />
+		  </div>
+ </div>
+  </div>
+   <label for="name">Motivo de Consulta:</label>
+  <textarea name="motivo" rows="10" cols="40" id="motivo"" placeholder="Motivo de consulta" readonly="readonly"><?php echo"".$substr7;?></textarea>
+   <div class="col-4 col-12-small">
+    <div class="col-4 col-12-small">
+	 <label for="name">Vive con:</label>
+      <input type="text" name="vive_con" id="vivecon" value="<?php echo"".$substr8;?>" placeholder="Vive con" readonly="readonly"> <br />
+	   </div>
+ <label for="name">Contenci&oacuten: </label>
+<select name="conteccion">
+<option><?php echo"".$substr9;?></option>
+<option>Si</option>
+
+<option>No</option>
+
+</select>
+</br>
+ </div>
+  <textarea name="con"  rows="10" cols="40" id="con" placeholder="Escribir que contencion tiene" readonly="readonly"><?php echo"".$substr10;?></textarea>
+		
+<?php 
+$substr="";$substr1="";$substr2="";$substr3="";$substr4="";
+$substr5="";
+
+$verificar_usuario=mysql_query("SELECT *
+		FROM  familiares
+		WHERE  id_paciente LIKE '$id'");
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$substr=$articulo['id_familia'];
+	$substr1=$articulo['id_paciente'];
+	$substr2=$articulo['madre'];
+	$substr3=$articulo['padre'];
+	$substr4=$articulo['hermanos'];
+	$substr5=$articulo['otrosF'];	
+}
+?>			
+		<h1>Antecedentes Familiares:  </H1>
+		  <div class="container">
+  <div class="row">
+  
+		 <div class="col-4 col-12-small"> 
+		 <label for="name">Madre:</label>
+     <input type="text" name="Madre" id="Madre" value="<?php echo"".$substr2;?>" placeholder="Madre" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Padre:</label>
+	  <input type="text" name="padre" id="padre" value="<?php echo"".$substr3;?>" placeholder="Padre" readonly="readonly"> <br />
+	   </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Hermanos:</label>
+	   <input type="text" name="hnos" id="hnos" value="<?php echo"".$substr4;?>" placeholder="Hnos" readonly="readonly"> <br />
+	    </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Otros:</label>
+	    <input type="text" name="otrosF" id="otrosF" value="<?php echo"".$substr5;?>" placeholder="Otros" readonly="readonly"> <br />
+		 </div> 
+  </div>
+   </div>
+    </div>
+<?php 
+$substr="";$substr1="";$substr2="";$substr3="";$substr4="";
+$substr5="";$substr6="";$substr7="";$substr8="";$substr9="";
+$substr10="";$substr11="";$substr12="";$substr13="";$substr14="";
+
+$verificar_usuario=mysql_query("SELECT *
+		FROM  anpatologicos
+		WHERE  id_pasiente_pa LIKE '$id'");
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$substr=$articulo['hta'];
+	$substr1=$articulo['dbt'];
+	$substr2=$articulo['epoc'];
+	$substr3=$articulo['ic'];
+	$substr4=$articulo['aim'];
+	$substr5=$articulo['arritmia'];	
+	$substr6=$articulo['tbco'];
+	$substr7=$articulo['oh'];
+	$substr8=$articulo['irc'];
+	$substr9=$articulo['acv'];
+	$substr10=$articulo['hit'];
+	$substr11=$articulo['alergias'];
+	$substr12=$articulo['traumas'];
+	$substr13=$articulo['internaciones'];
+	$substr14=$articulo['otrosP'];
+}
+?>        
+	<h1>Antecedentes Patologicos:  </H1>
+  <div class="col-4 col-12-small">
+<div class="container">
+  <div class="row">
+<div class="col-4 col-12-small">
+<input type="checkbox" id="HTA" name="HTA" <?php if($substr!=""){echo'checked="checked"';} ?>>
+<label for="HTA">HTA</label>
+ <textarea name="hta1" rows="10" cols="40" id="hta1" placeholder="describir" readonly="readonly"><?php echo"".$substr;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="DBT" name="DBT" <?php if($substr1!=""){echo'checked="checked"';} ?>>
+<label for="DBT">DBT</label>
+ <textarea name="DBT1" rows="10" cols="40" id="DBT1" placeholder="describir" readonly="readonly"><?php echo"".$substr1;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="Epoc" name="Epoc" <?php if($substr2!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="Epoc">Epoc</label>
+ <textarea name="Epoc1" rows="10" cols="40" id="Epoc1" placeholder="describir" readonly="readonly"><?php echo"".$substr2;?></textarea></br>
+</div> 
+<div class="col-4 col-12-small">
+<input type="checkbox" id="IC" name="IC" <?php if($substr3!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="IC">IC</label>
+ <textarea name="IC1" rows="10" cols="40" id="IC1" placeholder="describir" readonly="readonly"><?php echo"".$substr3;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="IAM" name="IAM" <?php if($substr4!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="IAM">IAM</label>
+ <textarea name="IAM1" rows="10" cols="40" id="IAM1" placeholder="describir"  readonly="readonly"><?php echo"".$substr4;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="Arritmia" name="Arritmia" <?php if($substr5!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="Arritmia">Arritmia</label>
+ <textarea name="Arritmia1" rows="10" cols="40" id="Arritmia1" placeholder="describir" readonly="readonly"><?php echo"".$substr5;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="tbco" name="tbco" <?php if($substr6!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="TCO">Tbco</label>
+ <textarea name="tbco1" rows="10" cols="40" id="tbco1" placeholder="describir" readonly="readonly"><?php echo"".$substr6;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="OH" name="OH" <?php if($substr7!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="OH">OH</label>
+ <textarea name="oh" rows="10" cols="40" id="oh1" placeholder="describir" readonly="readonly"><?php echo"".$substr7;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="IRC" name="IRC" <?php if($substr8!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="IRC">IRC</label>
+ <textarea name="irc1" rows="10" cols="40" id="irc1" placeholder="describir" readonly="readonly"><?php echo"".$substr8;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="ACV" name="ACV" <?php if($substr9!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="ACV">ACV</label>
+ <textarea name="acv1" rows="10" cols="40" id="acv1" placeholder="describir" readonly="readonly"><?php echo"".$substr9;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="HIT" name="HIT" <?php if($substr10!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="HIT">HIT</label>
+ <textarea name="hit1" rows="10" cols="40" id="hit1" placeholder="describir" readonly="readonly"><?php echo"".$substr10;?></textarea></br>
+</div>
+<div class="col-4 col-12-small">
+<input type="checkbox" id="Alergias" name="Alergias" <?php if($substr11!=""){echo'checked="checked"';} ?> readonly="readonly">
+<label for="Alergias">Alergias</label>
+ <textarea name="alergias1" rows="10" cols="40" id="alergias1" placeholder="describir" readonly="readonly"><?php echo"".$substr11;?></textarea></br>
+</div>
+</div>
+</div>
+<div class="container">
+  <div class="row">
+  
+		 <div class="col-4 col-12-small">
+		  <label for="name">Cirugias+/traumas:</label>
+ <input type="text" name="trauma" id="CX/traumas" value="<?php echo"".$substr12;?>" placeholder="Cirugias+/traumas" readonly="readonly"> <br />
+ </div>
+     <div class="col-4 col-12-small">
+    <label for="name">Internaciones</label>
+ <input type="text" name="Internaciones" id="Internaciones" value="<?php echo"".$substr13;?>" placeholder="Internaciones" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+    <label for="name">Otros:</label>
+ <input type="text" name="otrosP" id="otros" value="<?php echo"".$substr14;?>" placeholder="Otros" readonly="readonly"> <br />
+  </div>
+   </div>
+ </div>
+ <?php 
+ $substr1="";$substr2="";$substr3="";$substr4="";
+ 
+$verificar_usuario=mysql_query("SELECT *
+		FROM   vacunas
+		WHERE  id_vacunas_pa LIKE '$id'");
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$substr1=$articulo['gripe'];
+	$substr2=$articulo['numo'];
+	$substr3=$articulo['dt'];
+	$substr4=$articulo['vz'];	
+}
+?> 
+  	<h1>Vacunas  </H1>
+	<div class="container">
+  <div class="row">
+
+   <div class="col-4 col-12-small">
+     <label for="name">Gripe:</label>
+ <input type="text" name="gripe" id="gripe" value="<?php echo"".$substr1;?>" placeholder="Gripe" readonly="readonly"> <br />
+  </div>
+    <div class="col-4 col-12-small">
+	  <label for="name">Neumo:</label>
+ <input type="text" name="neumo" id="neumo" value="<?php echo"".$substr2;?>" placeholder="Neumo" readonly="readonly"> <br />
+  </div>
+   <div class="col-4 col-12-small">
+     <label for="name">DT:</label>
+ <input type="text" name="dt" id="dt" value="<?php echo"".$substr3;?>" placeholder="DT" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+    <label for="name">VZ:</label>
+ <input type="text" name="vz" id="vz" value="<?php echo"".$substr4;?>" placeholder="VZ" readonly="readonly"> <br />
+  </div>
+ <?php 
+$substr1="";$substr2="";$substr3="";$substr4="";
+ $substr5="";$substr6="";$substr7="";
+$verificar_usuario=mysql_query("SELECT *
+		FROM    practpreventivas
+		WHERE  id_p_paci LIKE '$id'");
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$substr1=$articulo['controlGineco'];
+	$substr2=$articulo['psa'];
+	$substr3=$articulo['mamo'];
+	$substr4=$articulo['vcc'];	
+	$substr5=$articulo['aud'];
+	$substr6=$articulo['buco'];
+	$substr7=$articulo['vis'];
+}
+?> 
+ </div></div>
+ <h1>Practicas Preventivas</h1>
+ <div class="container">
+  <div class="row">
+  
+  <div class="col-4 col-12-small">
+    <label for="name">Control Ginecologico/Urologico:</label>
+ <input type="text" name="Control" id="Control" value="<?php echo"".$substr1;?>" placeholder="Control Ginecologico/urologico" readonly="readonly"> <br />
+ 
+  </div>
+ <div class="col-4 col-12-small">
+  <label for="name">PSA:</label>
+ <input type="text" name="psa" id="psa" value="<?php echo"".$substr2;?>" placeholder="PSA" readonly="readonly"> <br />
+  </div>
+   <div class="col-4 col-12-small">
+    <label for="name">Mamografia:</label>
+ <input type="text" name="mamo" id="mamo" value="<?php echo"".$substr3;?>" placeholder="Mamografia" readonly="readonly"> <br />
+  </div>
+   <div class="col-4 col-12-small">
+    <label for="name">VCC:</label>
+ <input type="text" name="vcc" id="vcc" value="<?php echo"".$substr4;?>" placeholder="VCC" readonly="readonly"> <br />
+  </div>
+ 
+   <div class="col-4 col-12-small">
+    <label for="name">Auditivo:</label>
+ <input type="text" name="aud" id="aud" value="<?php echo"".$substr5;?>" placeholder="Auditivo" readonly="readonly"> <br />
+  </div>
+   
+   <div class="col-4 col-12-small">
+    <label for="name">BucoDental:</label>
+ <input type="text" name="buco" id="buco" value="<?php echo"".$substr6;?>" placeholder="BucoDental" readonly="readonly"> <br />
+  </div>
+   <div class="col-4 col-12-small">
+    <label for="name">Visual:</label>
+ <input type="text" name="vis" id="vis" value="<?php echo"".$substr7;?>" placeholder="Visual" readonly="readonly"> <br />
+  </div>
+   </div>
+    </div>
+<?php 
+$substr="";$substr1="";$substr2="";$substr3="";$substr4="";
+$substr5="";$substr6="";$substr7="";$substr8="";$substr9="";
+$substr10="";$substr11="";
+$verificar_usuario=mysql_query("SELECT *
+		FROM   medi_habituales
+		WHERE  id_mh_cli LIKE '$id'");
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$substr=$articulo['mh1'];
+	$substr1=$articulo['mh2'];
+	$substr2=$articulo['mh3'];
+	$substr3=$articulo['mh4'];
+	$substr4=$articulo['mh5'];
+	$substr5=$articulo['mh6'];	
+	$substr6=$articulo['mh7'];
+	$substr7=$articulo['mh8'];
+	$substr8=$articulo['mh9'];
+	$substr9=$articulo['mh10'];
+	$substr10=$articulo['mh_otros'];
+	$substr11=$articulo['mhe'];
+}
+?> 
+ <h1>Medicaci&oacuten Habitual</h1>
+ <div class="container">
+  <div class="row">
+   <div class="col-6">
+      <label for="name">1:</label>
+ <input type="text" name="MedicacionHabitual1" id="MedicacionHabitual1" value="<?php echo"".$substr;?>" placeholder="1 Medicacion Habitual" readonly="readonly"> 
+ </div>
+  <div class="col-6">
+    <label for="name">2:</label>
+  <input type="text" name="MedicacionHabitual2" id="MedicacionHabitual2" value="<?php echo"".$substr1;?>" placeholder="2 Medicacion Habitual" readonly="readonly"> 
+  </div>
+  <div class="col-6">
+     <label for="name">3:</label>
+   <input type="text" name="MedicacionHabitual3" id="MedicacionHabitual3" value="<?php echo"".$substr2;?>" placeholder="3 Medicacion Habitual" readonly="readonly"> 
+   </div>
+  <div class="col-6">
+      <label for="name">4:</label>
+    <input type="text" name="MedicacionHabitual4" id="MedicacionHabitual3" value="<?php echo"".$substr3;?>" placeholder="4 Medicacion Habitual" readonly="readonly"> 
+	</div>
+   <div class="col-6">
+	   <label for="name">5:</label>
+	 <input type="text" name="MedicacionHabitual5" id="MedicacionHabitual5" value="<?php echo"".$substr4;?>" placeholder="5 Medicacion Habitual" readonly="readonly"> 
+	 </div>
+   <div class="col-6">
+	    <label for="name">6:</label>
+  <input type="text" name="MedicacionHabitual6" id="MedicacionHabitual6" value="<?php echo"".$substr5;?>" placeholder="6 Medicacion Habitual" readonly="readonly"> 
+  </div>
+  <div class="col-6">
+     <label for="name">7:</label>
+   <input type="text" name="MedicacionHabitual7" id="MedicacionHabitual7" value="<?php echo"".$substr6;?>" placeholder="7 Medicacion Habitual" readonly="readonly"> 
+   </div>
+   <div class="col-6">
+      <label for="name">8:</label>
+    <input type="text" name="MedicacionHabitual8" id="MedicacionHabitual8" value="<?php echo"".$substr7;?>" placeholder="8 Medicacion Habitual" readonly="readonly"> 
+	</div>
+  <div class="col-6">
+	   <label for="name">9:</label>
+	 <input type="text" name="MedicacionHabitual9" id="MedicacionHabitual9" value="<?php echo"".$substr8;?>" placeholder="9 Medicacion Habitual" readonly="readonly"> 
+	 </div>
+   <div class="col-6">
+	    <label for="name">10:</label>
+  <input type="text" name="MedicacionHabitual10" id="MedicacionHabitual10" value="<?php echo"".$substr9;?>" placeholder="10 Medicacion Habitual" readonly="readonly">
+  </div> 
+  </div>
+  </div>
+   <label for="name"> Otros:</label>
+  <input type="text" name="MedicacionHabitualO" id="MedicacionHabitualO" value="<?php echo"".$substr10;?>" placeholder=" Medicacion Habitual" readonly="readonly"> <br />
+  <h1> Enfermedad Actual:</h1> 
+<textarea name="MedicacionHabitualE" rows="10" cols="40" id="MedicacionHabitualE"  readonly="readonly" ><?php echo"".$substr11;?></textarea>
+ 
+ 
+  <?php
+  $substr="";$substr1="";$substr2="";$substr2a="";$substr3="";$substr4="";
+  $substr5="";$substr6="";$substr7="";$substr8="";$substr9="";
+  $substr10="";$substr11="";$substr12="";$substr13="";$substr14="";
+  $substr15="";$substr16="";$substr17="";$substr18="";
+$verificar_usuario=mysql_query("SELECT *
+		FROM   exfisico
+		WHERE  id_paciente LIKE '$id'");
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$substr=$articulo['ta'];
+	$substr1=$articulo['fc'];
+	$substr2=$articulo['fr'];
+	$substr2a=$articulo['temp'];
+	$substr3=$articulo['sat'];
+	$substr4=$articulo['kg'];
+	$substr5=$articulo['talla'];	
+	$substr6=$articulo['orexana'];
+	$substr7=$articulo['diuresis'];
+	$substr8=$articulo['catarsis'];
+	$substr9=$articulo['somnia'];
+	$substr10=$articulo['piel'];
+	$substr11=$articulo['pulso'];
+	$substr12=$articulo['sg'];
+	$substr13=$articulo['cabCuello'];
+	$substr14=$articulo['cardio'];
+	$substr15=$articulo['respi'];
+	$substr16=$articulo['abdomi'];
+	$substr17=$articulo['neuro'];
+	$substr18=$articulo['mama'];
+	}
+?>
+  
+ 
+<h1>Examen fisico</h1>
+<div class="container">
+  <div class="row">
+  <div class="col-4 col-12-small">
+   <label for="name">TA:</label>
+ <input type="text" name="TAEx" id="TAEx" value="<?php echo"".$substr;?>" placeholder="TA:" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">FC:</label>
+<input type="text" name="FC" id="FC" value="<?php echo"".$substr1;?>" placeholder="FC" readonly="readonly"> <br />
+ </div>
+  <div class="col-4 col-12-small">
+   <label for="name">FR:</label>
+ <input type="text" name="FR" id="FR" value="<?php echo"".$substr2;?>" placeholder="Temperatura" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">T&#176;:</label>
+ <input type="text" name="tem" id="tem" value="<?php echo"".$substr2a;?>" placeholder="Frecuencia Respiratoria" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">SAT:</label>
+ <input type="text" name="SAT" id="SAT" value="<?php echo"".$substr3;?>" placeholder="SAT" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Peso:</label>
+ <input type="text" name="KG" id="KG" value="<?php echo"".$substr4;?>" placeholder="Peso" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Talla:</label>
+ <input type="text" name="talla" id="talla" value="<?php echo"".$substr5;?>" placeholder="Talla" readonly="readonly"> <br />
+  </div>
+   <div class="col-4 col-12-small">
+   <label for="name">Orexia:</label>
+ <input type="text" name="orexia" id="orexia" value="<?php echo"".$substr6;?>" placeholder="Orexia" readonly="readonly"> <br />
+  </div>
+   <div class="col-4 col-12-small">
+   <label for="name">Diuresis:</label>
+ <input type="text" name="diuresis" id="diuresis" value="<?php echo"".$substr7;?>" placeholder="Diuresis" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Catarsis</label>
+ <input type="text" name="catarsis" id="catarsis" value="<?php echo"".$substr8;?>" placeholder="Catarsis" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Somnia:</label>
+ <input type="text" name="somnia" id="somnia" value="<?php echo"".$substr9;?>" placeholder="Somnia" readonly="readonly"> <br />
+  </div>
+ 
+  <div class="col-4 col-12-small">
+   <label for="name">Piel:</label>
+ <input type="text" name="piel" id="piel" value="<?php echo"".$substr10;?>" placeholder=" Piel" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Pulsos:</label>
+ <input type="text" name="pulsos" id="pulsos" value="<?php echo"".$substr11;?>" placeholder=" Pulsos" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">SG:</label>
+ <input type="text" name="sg" id="sg" value="<?php echo"".$substr12;?>" placeholder=" SG" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Cabeza y Cuello:</label>
+ <input type="text" name="cabezaycuello" id="cabezaycuello" value="<?php echo"".$substr13;?>" placeholder=" Cabeza y Cuello" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Cardio:</label>
+ <input type="text" name="5cardio" id="5cardio" value="<?php echo"".$substr14;?>" placeholder="Cardio" readonly="readonly"> <br /> </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Respiraci&oacuten:</label>
+ <input type="text" name="respiracion" id="respiracion" value="<?php echo"".$substr15;?>" placeholder=" Respiracion" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Abdom:</label>
+ <input type="text" name="abdom" id="abdom" value="<?php echo"".$substr16;?>" placeholder=" Abdom" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Neuro:</label>
+ <input type="text" name="neuro" id="neuro" value="<?php echo"".$substr17;?>" placeholder=" Neuro" readonly="readonly"> <br />
+  </div>
+  <div class="col-4 col-12-small">
+   <label for="name">Genit/Mamas:</label>
+ <input type="text" name="genit/mamas" id="genit/mamas" value="<?php echo"".$substr18;?>" placeholder="Genit/Mamas" readonly="readonly"> <br />
+  </div>
+  
+   </div>	   
+  </div>	
+<?php 
+$substr1="";$substr2="";$substr3="";
+$verificar_usuario=mysql_query("SELECT *
+		FROM otros
+		WHERE  id_paciente LIKE '$id'");
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$substr1=$articulo['problema'];
+	$substr2=$articulo['sindromes'];
+	$substr3=$articulo['pendientes'];
+}
+?>
+  <h1>Problemas: </h1>
+ <textarea name="proble" rows="10" cols="40" id="broblemas"  placeholder="Problemas" readonly="readonly"><?php echo"".$substr1;?></textarea>
+  
+    <h1>Sindromes Geriatricos</h1>
+ <textarea name="sindr" rows="10" cols="40" id="Diagnosticos"  placeholder="Diagnosticos(Smes Geriatricos)" readonly="readonly"><?php echo"".$substr2;?></textarea>
+
+</br>
+  <h1>Pendientes: </h1>
+   <textarea name="pend" rows="10" cols="40" id="Pendientes"  placeholder="Pendientes" readonly="readonly"><?php echo"".$substr3;?></textarea>
+
+  </br>
+<!--
+<a href="Sindromes.html">Calcular escalas</a>
+</br></br>
+<h1>Pendientes: </h1>
+  <textarea name="evolucion" rows="10" cols="40" id="evolucion" placeholder="Cargar Evolucion" required></textarea>
+  </br>-->
+  </br> 
+        </div>
+      </form>
+
+			<?php 
+
+
+if($dni != ''){//Hacemos la consulta
+$verificar_usuario=mysql_query("SELECT *
+		FROM  evolucion
+		WHERE  dni LIKE '$dni'");
+echo"<table>";
+echo "<tr align= 'center'><td>Modificar</td>
+								<td>Fecha</td>
+								<td>Evolucion</td>";;
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$orden=$articulo['id'];
+	$fecha=$articulo['updated_at'];
+	$evolucion=$articulo['evo_paciente'];	
+	$aux = $aux+1;
+
+	echo "<tr align= 'center'><td><a href='verEvolucion.php?x2=$orden'>
+	<input type='button' value='$orden'></a></td>	 
+								<td>$fecha</td>
+								<td>$evolucion</td>";
+	
+	}
+	if ($aux<1){
+		echo"<b>No se encontro resultado a la busqueda...</b>";
+	}
+echo"</table>";
+}
+
+mysql_close($conn);
+?>												
+
+			</div>
+</div>
+
+
+		<!-- Scripts -->
+		<script>
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var filePreview = document.createElement('img');
+                    filePreview.id = 'file-preview';
+                    //e.target.result contents the base64 data from the image uploaded
+                    filePreview.src = e.target.result;
+                    console.log(e.target.result);
+
+                    var previewZone = document.getElementById('file-preview-zone');
+                    previewZone.appendChild(filePreview);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        if ( document.getElementById( "archivo" )) {
+        	var fileUpload = document.getElementById('archivo');
+            fileUpload.onchange = function (e) {
+                readFile(e.srcElement);
+            }
+      	}else{
+      		
+          	}
+        
+
+    </script>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

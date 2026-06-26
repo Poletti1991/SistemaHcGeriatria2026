@@ -1,0 +1,221 @@
+.fleft {float:left}
+.fright {float:right}
+.fcenter {float:none;text-align:center}
+.fclear {clear:both;}
+body {margin:0;padding:0;background:#4C9BCD url(images/img01.jpg) repeat-x left top;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#919191}
+h1, h2, h3 {margin:0;text-transform:uppercase;font-weight:normal;color:#000066}
+h1 {font-size:44px}
+h2 {font-size:18px}
+h3 {}
+p, ul, ol {margin-top:0;line-height:240%;text-align:justify}
+ul, ol {}
+blockquote {}
+a:hover {text-decoration:none}
+a img {border:none}
+img.left {float:left;margin:7px 30px 0 0}
+img.right {float:right;margin:7px 0 0 30px}
+hr {display:none}
+.list1 {}
+.list1 li {float:left;line-height:normal}
+.list1 li img {margin:0 30px 30px 0}
+.list1 li.alt img {margin-right:0}
+#wrapper {}
+
+
+
+
+
+/* LOGO */
+#logo {width:920px;height:100px;margin:0 auto;padding-top:5px;padding-left:20px; background:url(images/img12.jpg) no-repeat left top}
+#logo h1, #logo p {float:left;margin:0;line-height:normal;font-weight:normal;color:#fff}
+#logo p {padding:13px 0 0 5px;text-transform:lowercase;font-family:Georgia, "Times New Roman",Times,serif;font-size:13px;color:#fff}
+#logo h1 {letter-spacing:-1px;font-size:30px}
+#logo a {text-decoration:none;color:#fff}
+#banner {padding-bottom:20px}
+
+/* Content */
+#content {float:left;width:600px;color:#000000;}
+.inner_copy {border:0;color:#F0FFFF;float:left;width:50% !important;margin:-100% 0 0 0;overflow:hidden;line-height:0;padding:0;font-size:11px}
+/* Content2 */
+#content2 {float:left;width:700px;color:#000000;
+	 border-top: 1px solid #666666;
+   border-left: 1px solid #666666;}
+
+/* Post*/
+.post {margin-bottom:30px;padding-bottom:20px;background:#F0FFFF}
+.post .title {padding:4px 20px 0 20px;height:44px;background:#F0FFFF}
+.post .title a {text-decoration:none;text-transform:capitalize;font-size:30px;color:#000000}
+.post .date {display:inline-block;margin:0;padding:0 10px;color:#000000}
+.post .meta {margin-left:2px;padding:10px 30px 0 10px;font-family:Arial,Helvetica,sans-serif;font-weight:normal;font-size:10px;color:#66665E}
+.post .meta span {margin:0}
+.post .entry {padding:30px 20px 20px 20px}
+
+/* Sidebar */
+#sidebar {float:left;width:150px;font-family:Arial,Helvetica,sans-serif;font-size:12px; background:#F0FFFF}
+#sidebar ul {margin:0;padding:0;list-style:none;line-height:normal}
+#sidebar li {margin-bottom:30px;padding:0 0 0px 0;background:#F0FFFF}
+#sidebar li ul {margin:0 0}
+#sidebar li li {margin:0;padding:0px 0 0px 0;border-bottom:1px solid #F0FFFF}
+#sidebar li li a {padding:0 20px;font-weight:normal}
+#sidebar li li a:hover {color:#666}
+#sidebar p {margin:0;padding:0 14px}
+#sidebar h2 {height:30px;margin:0 0 10px 0;padding:6px 20px 2px 20px;background:#4C9BCD;text-transform:capitalize;font-size:18px;font-weight:normal;color:#4999CB}
+#sidebar p {line-height:200%}
+#sidebar a {text-align:left;text-decoration:none;font-weight:bold;color:#666}
+
+
+/* Footer */
+#footer {width:940px;height:120px;margin:0 auto;padding:0;background:url(images/img09.jpg) no-repeat left top}
+#footer p {margin:0 11px;padding:30px 0 0 0;text-align:center;text-transform:uppercase;line-height:normal;font-size:10px; color:#F0FFFF;font-weight:bold;}
+#footer a {color:#F0FFFF; font-weight:bold;}
+
+/*Menu Horizontal*/
+#cssmenu,
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul li a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  line-height: 1;
+  display: block;
+  position: relative;
+  font-family: Capriola, Helvetica, sans-serif;
+}
+#cssmenu {
+  width: auto;
+  height: 59px;
+  padding-bottom: 4px;
+}
+#cssmenu.align-right {
+  float: right;
+}
+#cssmenu.align-right ul li {
+  float: right;
+  margin-right: 0;
+  margin-left: 4px;
+}
+#cssmenu.align-right ul li:first-child,
+#cssmenu.align-right ul li:first-child > a {
+  border-bottom-right-radius: 3px;
+}
+#cssmenu #bg-one,
+#cssmenu #bg-two,
+#cssmenu #bg-three,
+#cssmenu #bg-four {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+#cssmenu #bg-one {
+  height: 10px;
+  background: #0f71ba;
+}
+#cssmenu #bg-two {
+  height: 59px;
+  z-index: 2;
+  background: url('images/bg.png');
+}
+#cssmenu #bg-three {
+  bottom: 4px;
+  height: 55px;
+  z-index: 3;
+  background: #222222;
+  background: -moz-linear-gradient(top, #555555 0%, #222222 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #555555), color-stop(100%, #222222));
+  background: -webkit-linear-gradient(top, #555555 0%, #222222 100%);
+  background: -o-linear-gradient(top, #555555 0%, #222222 100%);
+  background: -ms-linear-gradient(top, #555555 0%, #222222 100%);
+  background: linear-gradient(to bottom, #555555 0%, #222222 100%);
+}
+#cssmenu #bg-four {
+  bottom: 4px;
+  height: 55px;
+  z-index: 4;
+  background: url('images/bg.png');
+}
+#cssmenu ul {
+  height: 59px;
+}
+#cssmenu ul li {
+  float: left;
+  margin-right: 4px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  z-index: 5;
+}
+#cssmenu ul li a {
+  padding: 24px 30px 20px 30px;
+  margin-bottom: 4px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #eeeeee;
+  font-size: 15px;
+  text-decoration: none;
+}
+#cssmenu ul li:first-child,
+#cssmenu ul li:first-child > a {
+  border-bottom-left-radius: 3px;
+}
+#cssmenu ul li:hover,
+#cssmenu ul li.active {
+  background: #0f71ba;
+  background: -moz-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3fa4f0), color-stop(100%, #0f71ba));
+  background: -webkit-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+  background: -o-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+  background: -ms-linear-gradient(top, #3fa4f0 0%, #0f71ba 100%);
+  background: linear-gradient(to bottom, #3fa4f0 0%, #0f71ba 100%);
+}
+#cssmenu ul li a:hover,
+#cssmenu ul li.active > a {
+  background: url('images/bg.png');
+  color: #ffffff;
+}
+
+
+/*menu vertical*/
+.menu_simple ul {
+margin: 0;
+padding: 0;
+width:185px;
+list-style-type: none;
+}
+.menu_simple ul li a {
+text-decoration: none;
+color: white;
+padding: 5px 11px;
+display:block;
+background-color: #0099FF;/*azul claro*/
+}
+.menu_simple ul li a:visited {
+color: white;
+}
+.menu_simple ul li a:hover, .menu_simple ul li .current {
+color: white;
+background-color: #0066FF/*azul fuerte*/
+}
+
+
+/*validacion css
+<p>
+    <a href="http://jigsaw.w3.org/css-validator/check/referer">
+        <img style="border:0;width:88px;height:31px"
+            src="http://jigsaw.w3.org/css-validator/images/vcss"
+            alt="Valid CSS!" />
+    </a>
+</p>
+
+
+<p>
+<a href="http://jigsaw.w3.org/css-validator/check/referer">
+    <img style="border:0;width:88px;height:31px"
+        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+        alt="Valid CSS!" />
+    </a>
+</p>
+
+*/

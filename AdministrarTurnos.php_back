@@ -1,0 +1,137 @@
+<?php
+session_start();
+
+if ($_SESSION['valor'] != true) {	
+	header('Location: index.html');
+}
+$hoy = date('Y-m-d');
+?>
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Turnos</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main (2).css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript (2).css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+							<!-- 	<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">.</span>
+								</a>-->
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+					
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="menu.php">Principal</a></li>
+							<li><a href="cerrar_sesion.php">cerrar sesion</a></li>
+							
+							<li><a href="InformePacientes.php">Cargar Informes Pacientes</a></li>							
+							<li><a href="CargarHC.php">Cargar Historias Clinicas</a></li>
+							
+							<li><a href="ModificarHC.php">Modificar Historias Clinicas</a></li>
+						
+							<li><a href="AdministrarTurnos.php">Administrar Turnos</a></li>
+							
+							<li><a href="Informe2Pacientes.php">Ver Informes Pacientes</a></li>
+							<li><a href="BuscarPacientes.php">Buscar/Listar H.C. Pacientes</a></li>							
+										
+							<li><a href="AgregarEvolucion.php">Evolucion</a></li>
+							<li><a href="AgregarPendientes.php">Pendientes</a></li>
+							
+							
+							<li><a href="escalas.php">Calcular Escalas</a></li>
+															<!--<li><a href="AgregarPendientes.html">Agregar Pendientes</a></li>-->
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner ">
+							<h1>Turnos</h1>
+							  <form action="subirTurno.php" method="post">	
+    <div id="page">
+	<p>Seleccione una fecha para el turno</p>
+	  <input type="date" name="fecha" step="1" min="2019-01-01" max="2025-12-31" value="<?php echo $hoy; ?>"> <br />
+	  <br />
+	  <p>Ingrese el Horario</p>
+	  <input type="text" name="hora" id="Hs" placeholder="(*)Ej: 20:00" required> <br />
+	  	<p>Ingrese el DNI de un paciente</p>
+	  <input type="text" name="dni" id="dni" placeholder="(*)DNI" required> <br />
+	  <p>Ingrese el Apellido y Nombre de un paciente</p>
+	  <input type="text" name="nombre" id="nombre" placeholder="Apellido y Nombre" > <br />         
+ <button>Asignar Turnos</button> 
+        </div>
+      </form><br/><br/>
+
+<h1>Lista de Turnos:</h1>
+
+<?php 
+include "conectar.php";//conectar a la base de dato
+
+$verificar_usuario=mysql_query("SELECT *
+		FROM  turnos");
+echo"<table>";
+echo "<tr align= 'center'><td>Fecha</td>
+								<td>Hora</td>
+								<td>DNI</td>
+								<td>Apellido y Nombre</td>";;
+while ($articulo= mysql_fetch_array($verificar_usuario)){
+	$fecha=$articulo['fecha_turno'];
+	$hora=$articulo['hora_turno'];
+	$dni=$articulo['dni'];
+	$nombre=$articulo['nombre'];	
+	$aux = $aux+1;
+
+	echo "<tr align= 'center'><td>$fecha</td>
+								<td>$hora</td>
+								<td>$dni</td>
+								<td>$nombre</td>";
+	
+	}
+	if ($aux<1){
+		echo"<b>No se encontro resultado a la busqueda...</b>";
+	}
+echo"</table>";
+
+
+
+
+	
+
+
+
+mysql_close($conn);
+?>
+			</div>
+</div>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
